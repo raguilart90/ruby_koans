@@ -14,7 +14,29 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  # WRITE THIS CODE
+
+  hyp, cat1, cat2 = if a > b && a > c
+  						[a, b, c]
+  					elsif b > a && b > c
+  						[b, a, c]
+  					else
+  						[c, a, b]
+  					end
+
+  if cat1 <= 0 || cat2 <= 0 || hyp <= 0
+  	raise TriangleError
+  elsif cat1 + cat2 <= hyp
+  	raise TriangleError
+  end
+
+  if hyp == cat1 && hyp == cat2
+  	return :equilateral
+  elsif hyp == cat1 || hyp == cat2 || cat1 == cat2
+  	return :isosceles  	
+  else
+  	return :scalene
+  end
+
 end
 
 # Error class used in part 2.  No need to change this code.

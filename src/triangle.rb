@@ -16,11 +16,27 @@
 def triangle(a, b, c)
   # WRITE THIS CODE
   #--
-  a, b, c = [a, b, c].sort
-  fail TriangleError if (a+b) <= c
-  sides = [a, b, c].uniq
-  [nil, :equilateral, :isosceles, :scalene][sides.size]
-  #++
+  hyp, cat1, cat2 = if a > b && a > c
+  	[a, b, c]
+  else if b > c && b > a
+  	[b, a, c]
+  else
+  	[c, a, b]
+  end
+  
+  if cat1 <= 0 || cat2 <= 0 || hyp <= 0
+  	raise TriangleError
+  else if cat1 + cat2 <= hyp
+  	raise TriangleError
+  end
+
+  type = if hyp == cat1 && hyp == cat2
+  	:equilateral
+  else if hyp == cat1 || hyp == cat2
+  	:isosceles
+  else
+  	:scalene
+  end
 end
 
 # Error class used in part 2.  No need to change this code.
